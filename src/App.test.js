@@ -1,9 +1,21 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import App from './App';
+import React from "react";
+import { shallow, mount } from "enzyme";
+import Person from "./components/Person/Person";
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+
+const person = {
+    id: 2,
+    name: "Nikola",
+    craft: "ISS"
+};
+
+it("renders without crashing", () => {
+    shallow(<Person />);
+});
+
+describe("<Person />", () => {
+    it('person accepts name props', () => {
+        const wrapper = mount(<Person name={person.name} />);
+        expect(wrapper.props().name).toEqual(person.name);
+    })
 });
